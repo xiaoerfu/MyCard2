@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_back"
+    tools:context="com.example.mycard.view.LoginActivity">
+
+    <EditText
+        android:id="@+id/editPassword"
+        android:layout_width="185dp"
+        android:layout_height="35dp"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:hint="请输入密码"
+        android:textSize="18sp"
+        android:background="#FFF"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/name"
+        android:layout_toEndOf="@+id/name" />
+
+    <TextView
+        android:id="@+id/password"
+        android:layout_height="35dp"
+        android:layout_width="70dp"
+        android:text="密码："
+        android:textColor="#FFF"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:layout_above="@+id/login"
+        android:layout_toLeftOf="@+id/editPassword"
+        android:layout_toStartOf="@+id/editPassword" />
+
+    <TextView
+        android:layout_width="70dp"
+        android:layout_height="35dp"
+        android:text="账号："
+        android:textSize="18sp"
+        android:id="@+id/name"
+        android:gravity="center"
+        android:textColor="#FFF"
+        android:layout_alignTop="@+id/editName"
+        android:layout_toLeftOf="@+id/editName"
+        android:layout_toStartOf="@+id/editName" />
+
+    <EditText
+        android:id="@+id/editName"
+        android:layout_width="185dp"
+        android:layout_height="35dp"
+        android:inputType="textPersonName"
+        android:hint="请输入账号"
+        android:textSize="18sp"
+        android:background="#FFF"
+        android:layout_above="@+id/editPassword"
+        android:layout_alignRight="@+id/login"
+        android:layout_alignEnd="@+id/login"
+        android:layout_marginBottom="20dp" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="420dp"
+        android:id="@+id/linearLayout"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
+
+        <TextView
+            android:id="@+id/register"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="20dp"
+            android:text="还没有账号，点击注册"
+            android:textColor="#FFF"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/login"
+        android:text="登         录"
+        android:textSize="19sp"
+        android:textColor="#FFF"
+        android:background="@drawable/shap"
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/editPassword"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>
