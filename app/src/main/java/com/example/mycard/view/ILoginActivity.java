@@ -4,6 +4,7 @@ import com.example.mycard.bean.User;
 
 /**
  * Created by lijianfu on 2017/4/1.
+ * 登陆实现的接口类
  */
 public interface ILoginActivity {
 
