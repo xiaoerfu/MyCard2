@@ -1,60 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/drawer_layout">
-
-<FrameLayout
-    android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <!--toolBar相当于菜单栏-->
-    <android.support.v7.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:id="@+id/toolbar"
-        android:background="?attr/colorPrimary"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/Theme.AppCompat.Light">
-    </android.support.v7.widget.Toolbar>
-</FrameLayout>
 
-    <!--底部导航栏-->
-    <!--框架的布局,不要轻易改动-->
-    <android.support.v4.app.FragmentTabHost
-        android:id="@+id/tabHost"
+    <android.support.v4.widget.DrawerLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        >
-        <!--更改TabWidget这个控件在LinearLayout容器里的上下位置,就可以改变TabHost里控制fragment的按钮所在的上下位置-->
-        <LinearLayout
+        android:id="@+id/drawer_layout">
+
+        <!--ToolBar-->
+        <include layout="@layout/toolbar"/>
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <FrameLayout
-                android:id="@android:id/tabcontent"
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:layout_height="0dp">
-            </FrameLayout>
-
-            <TabWidget
-                android:id="@android:id/tabs"
-                android:divider="@null"
-                android:background="#2bdc7a"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </TabWidget>
-
-        </LinearLayout>
-
-
-    </android.support.v4.app.FragmentTabHost>
+            android:layout_height="match_parent">
+        <!--底部导航栏-->
+        <include layout="@layout/navigation"/>
+        </FrameLayout>
 
     <!--侧滑菜单栏-->
     <android.support.design.widget.NavigationView
@@ -67,3 +30,4 @@
     </android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>
+</FrameLayout>

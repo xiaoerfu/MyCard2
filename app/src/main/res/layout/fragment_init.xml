@@ -2,16 +2,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#9dd699"
     tools:context="com.example.mycard.Fragment.InitFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:textSize="30sp"
-        android:textColor="#1a1919"
-        android:layout_width="match_parent"
-        android:layout_height="517dp"
-        android:text="初始化"
-        android:id="@+id/textView"
-        android:layout_gravity="center_horizontal|bottom" />
+        <!-- TODO: Update blank fragment layout -->
+        <ImageView
+            android:id="@+id/ivImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            />
+        <TextView
+            android:id="@+id/tvTab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/ivImg"
+            android:textColor="#AEAEAE"
+            android:text="初始化"
+            android:textSize="15sp"
+            android:layout_marginTop="2dp" />
 
 </FrameLayout>
