@@ -7,10 +7,10 @@
     tools:context="com.example.mycard.view.LoginActivity">
 
     <EditText
-        android:id="@+id/editPassword"
+        android:id="@+id/registerPass"
         android:layout_width="190dp"
         android:layout_height="35dp"
-        android:inputType="textPassword"
+        android:inputType="text"
         android:ems="10"
         android:hint="请输入密码"
         android:textSize="18sp"
@@ -20,16 +20,15 @@
         android:layout_toEndOf="@+id/name" />
 
     <TextView
-        android:id="@+id/password"
         android:layout_height="35dp"
         android:layout_width="70dp"
         android:text="密码："
         android:textColor="#FFF"
         android:textSize="18sp"
         android:gravity="center"
-        android:layout_above="@+id/login"
-        android:layout_toLeftOf="@+id/editPassword"
-        android:layout_toStartOf="@+id/editPassword" />
+        android:layout_above="@+id/register"
+        android:layout_toLeftOf="@+id/registerPass"
+        android:layout_toStartOf="@+id/registerPass" />
 
     <TextView
         android:layout_width="70dp"
@@ -39,48 +38,33 @@
         android:id="@+id/name"
         android:gravity="center"
         android:textColor="#FFF"
-        android:layout_alignTop="@+id/editName"
-        android:layout_toLeftOf="@+id/editName"
-        android:layout_toStartOf="@+id/editName" />
+        android:layout_alignTop="@+id/registerName"
+        android:layout_toLeftOf="@+id/registerName"
+        android:layout_toStartOf="@+id/registerName" />
 
     <EditText
-        android:id="@+id/editName"
+        android:id="@+id/registerName"
         android:layout_width="190dp"
         android:layout_height="35dp"
         android:inputType="textPersonName"
         android:hint="请输入账号"
         android:textSize="18sp"
         android:background="#FFF"
-        android:layout_above="@+id/editPassword"
-        android:layout_alignRight="@+id/login"
-        android:layout_alignEnd="@+id/login"
+        android:layout_above="@+id/registerPass"
+        android:layout_alignRight="@+id/register"
+        android:layout_alignEnd="@+id/register"
         android:layout_marginBottom="20dp" />
-
-        <TextView
-            android:id="@+id/register"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:text="还没有账号，点击注册"
-            android:textColor="#FFF"
-            android:gravity="center"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_below="@+id/login"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true" />
-
 
     <Button
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:id="@+id/login"
-        android:text="登         录"
+        android:id="@+id/register"
+        android:text="注         册"
         android:textSize="19sp"
         android:textColor="#FFF"
         android:background="@drawable/shap"
         android:layout_marginTop="40dp"
-        android:layout_below="@+id/editPassword"
+        android:layout_below="@+id/registerPass"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
