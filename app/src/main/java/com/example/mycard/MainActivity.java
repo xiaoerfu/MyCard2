@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements TabHost.OnTabChan
         View view= LayoutInflater.from(this).inflate(R.layout.fragment_tab,null);
         ((TextView)view.findViewById(R.id.tvTab)).setText(TabDb.getTabsTxt()[idx]);
         if(idx==0){
-            ((TextView)view.findViewById(R.id.tvTab)).setTextColor(Color.RED);
+            ((TextView)view.findViewById(R.id.tvTab)).setTextColor(Color.argb(255,233,92,57));
             ((ImageView)view.findViewById(R.id.ivImg)).setImageResource(TabDb.getTabsImgLight()[idx]);
         }else{
             ((ImageView)view.findViewById(R.id.ivImg)).setImageResource(TabDb.getTabsImg()[idx]);
@@ -96,9 +96,9 @@ public class MainActivity extends AppCompatActivity implements TabHost.OnTabChan
             View view=tabw.getChildAt(i);
             ImageView iv=(ImageView)view.findViewById(R.id.ivImg);
             if(i==tabHost.getCurrentTab()){
-                ((TextView)view.findViewById(R.id.tvTab)).setTextColor(Color.RED);
+                ((TextView)view.findViewById(R.id.tvTab)).setTextColor(Color.argb(255,233,92,57));
                 iv.setImageResource(TabDb.getTabsImgLight()[i]);
-            }else{        ((TextView)view.findViewById(R.id.tvTab)).setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+            }else{        ((TextView)view.findViewById(R.id.tvTab)).setTextColor(getResources().getColor(R.color.colorPrimary));
                 iv.setImageResource(TabDb.getTabsImg()[i]);
             }
 

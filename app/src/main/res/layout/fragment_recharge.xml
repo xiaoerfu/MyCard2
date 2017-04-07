@@ -1,7 +1,10 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginTop="?attr/actionBarSize"
+    android:background="@drawable/home1"
     tools:context="com.example.mycard.Fragment.RechargeFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -12,15 +15,40 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         />
-    <TextView
-        android:id="@+id/tvTab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/ivImg"
-        android:textColor="#AEAEAE"
-        android:text="充值中心"
-        android:textSize="15sp"
-        android:layout_marginTop="2dp" />
 
-</FrameLayout>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/cardOwner"
+        android:hint="请输入卡拥有者"
+        android:layout_below="@+id/cardBalance"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="31dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/cardBalance"
+        android:hint="请输入充值金额"
+        android:layout_marginTop="51dp"
+        android:layout_below="@+id/ivImg"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/recharge"
+        android:text="充值"
+        android:textSize="15sp"
+        android:background="@drawable/shap"
+        android:textColor="#FFF"
+        android:layout_gravity="end"
+        android:layout_marginTop="38dp"
+        android:layout_below="@+id/cardOwner"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>
