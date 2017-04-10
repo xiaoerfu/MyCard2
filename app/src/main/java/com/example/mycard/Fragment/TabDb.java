@@ -4,6 +4,7 @@ import com.example.mycard.R;
 
 /**
  * Created by lijianfu on 2017/4/6.
+ * 导航栏的管理
  */
 public class TabDb {
 

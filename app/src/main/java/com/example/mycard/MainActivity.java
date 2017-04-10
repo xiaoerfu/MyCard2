@@ -1,8 +1,12 @@
 package com.example.mycard;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.view.GravityCompat;
@@ -11,8 +15,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,13 +24,18 @@ import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
 
+import com.example.mycard.Fragment.MessageFragment;
 import com.example.mycard.Fragment.TabDb;
+import com.example.mycard.view.LoginActivity;
 
 public class MainActivity extends AppCompatActivity implements TabHost.OnTabChangeListener {
 
     private DrawerLayout mDrawerLayout;                 //侧滑菜单
     private NavigationView navView;                           //侧滑菜单项目
     private FragmentTabHost tabHost;                        //导航栏
+    private TextView showName;
+    private TextView showMessage;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,15 +54,27 @@ public class MainActivity extends AppCompatActivity implements TabHost.OnTabChan
 
         /*初始化侧滑*/
         navView = (NavigationView)findViewById(R.id.nav_view);
-        navView.setCheckedItem(R.id.nav_call);
-
+        navView.setCheckedItem(0);
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener(){
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.backLogin:                                            // 退出登录
+                        Intent back = new Intent(MainActivity.this,LoginActivity.class);
+                        startActivity(back);
+                        break;
+                    default:
+                        break;
+                }
                 mDrawerLayout.closeDrawers();
                 return true;
             }
         });
+
+        LayoutInflater factorys = LayoutInflater.from(MainActivity.this);//获取MainActivity中LayoutInflater （上下文参数）
+        View view = factorys.inflate(R.layout.fragment_message,null);
+        showName = (TextView)view.findViewById(R.id.showMessage);
+        showName.setText("安居宝");
 
         /*初始化底部导航栏*/
         tabHost=(FragmentTabHost)super.findViewById(android.R.id.tabhost);
@@ -64,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements TabHost.OnTabChan
         initTab();
     }
 
-    /*导航栏*/
+    /*导航栏初始化*/
     private void initTab(){
         String tabs[]= TabDb.getTabsTxt();
         for(int i=0;i<tabs.length;i++){

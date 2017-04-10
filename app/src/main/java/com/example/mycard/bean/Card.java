@@ -1,24 +1,18 @@
 package com.example.mycard.bean;
 
+import org.litepal.crud.DataSupport;
+
 /**
  * Created by lijianfu on 2017/4/7.
  * 建立card的实体类
  */
-public class Card {
+public class Card extends DataSupport {
 
     private int cardId;                                 //序号
     private int cardNum;                            //卡号
     private String cardOwner;                   //卡拥有者
     private int ownerNum;                        //拥有者ID
-    private long cardBalance;                   //卡余额
-
-    public Card(int cardId, int cardNum, String cardOwner, long cardBalance, int ownerNum) {
-        this.cardId = cardId;
-        this.cardNum = cardNum;
-        this.cardOwner = cardOwner;
-        this.cardBalance = cardBalance;
-        this.ownerNum = ownerNum;
-    }
+    private double cardBalance;                   //卡余额
 
     public int getCardId() {
         return cardId;
@@ -52,11 +46,11 @@ public class Card {
         this.ownerNum = ownerNum;
     }
 
-    public long getCardBalance() {
+    public double getCardBalance() {
         return cardBalance;
     }
 
-    public void setCardBalance(long cardBalance) {
+    public void setCardBalance(double cardBalance) {
         this.cardBalance = cardBalance;
     }
 

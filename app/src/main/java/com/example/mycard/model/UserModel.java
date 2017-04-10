@@ -20,7 +20,7 @@ public class UserModel implements IUserModel{
             public void run() {
                 super.run();
                 try{
-                    Thread.sleep(3000);
+                    Thread.sleep(2000);
                     if (username.equals("shaniuer") && userpassword.equals("1204")){
                         onLoginListener.loginSuccess(new User(username,userpassword));
                     }else{

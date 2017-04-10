@@ -14,7 +14,7 @@
         <include layout="@layout/toolbar"/>
 
         <!--底部导航栏-->
-        <include layout="@layout/navigation"/>
+        <include layout="@layout/activity_navigation"/>
 
     <!--侧滑菜单栏-->
     <android.support.design.widget.NavigationView
@@ -23,7 +23,7 @@
         android:id="@+id/nav_view"
         android:layout_gravity="start"
         app:menu="@menu/nav_menu"
-        app:headerLayout="@layout/nav_header">
+        app:headerLayout="@layout/activity_navheader">
     </android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>
