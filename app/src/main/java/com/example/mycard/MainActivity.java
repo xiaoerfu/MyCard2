@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity implements TabHost.OnTabChan
     private NavigationView navView;                           //侧滑菜单项目
     private FragmentTabHost tabHost;                        //导航栏
     private TextView showName;
-    private TextView showMessage;
 
 
     @Override
@@ -62,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements TabHost.OnTabChan
                     case R.id.backLogin:                                            // 退出登录
                         Intent back = new Intent(MainActivity.this,LoginActivity.class);
                         startActivity(back);
+                        finish();
                         break;
                     default:
                         break;
@@ -70,11 +70,6 @@ public class MainActivity extends AppCompatActivity implements TabHost.OnTabChan
                 return true;
             }
         });
-
-        LayoutInflater factorys = LayoutInflater.from(MainActivity.this);//获取MainActivity中LayoutInflater （上下文参数）
-        View view = factorys.inflate(R.layout.fragment_message,null);
-        showName = (TextView)view.findViewById(R.id.showMessage);
-        showName.setText("安居宝");
 
         /*初始化底部导航栏*/
         tabHost=(FragmentTabHost)super.findViewById(android.R.id.tabhost);
@@ -133,6 +128,10 @@ public class MainActivity extends AppCompatActivity implements TabHost.OnTabChan
         switch (item.getItemId()){
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
+//                LayoutInflater factorys = LayoutInflater.from(MainActivity.this);//获取MainActivity中LayoutInflater （上下文参数）
+//                View view = factorys.inflate(R.layout.activity_navheader,null);
+//                showName = (TextView)view.findViewById(R.id.headerName);
+//                showName.setText("安居宝");
                 break;
             default:
                 break;

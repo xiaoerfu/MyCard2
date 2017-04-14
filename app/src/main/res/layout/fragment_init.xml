@@ -61,14 +61,15 @@
             android:layout_height="wrap_content"
             android:id="@+id/ownerId"
             android:hint="请输入卡的ID号"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/ivImg"
-            android:layout_toEndOf="@+id/ivImg" />
+            android:layout_below="@+id/cardOwner"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="35dp" />
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="初始化"
+            android:text="初始化数据"
             android:id="@+id/init"
             android:textColor="#FFF"
             android:background="@drawable/shap"

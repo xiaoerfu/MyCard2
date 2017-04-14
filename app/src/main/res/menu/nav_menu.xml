@@ -19,7 +19,9 @@
             android:title="联系我们" />
         <item
             android:id="@+id/backLogin"
-            android:icon="@drawable/news"
+            android:icon="@drawable/ic_settings"
             android:title="退出登录"/>
     </group>
+    <group
+        />
 </menu>

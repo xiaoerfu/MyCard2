@@ -1,4 +1,30 @@
 apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
+
+buildscript{
+    repositories{
+        apply plugin: 'eclipse'
+        mavenCentral()
+    }
+    dependencies{
+        classpath 'com.android.tools.build:gradle:2.1.0'
+        classpath 'org.greenrobot:greendao-gradle-plugin:3.1.0'
+    }
+}
+greendao{
+    /**
+     * 版本号
+     */
+    schemaVersion 1
+    /**
+     * greendao输出dao的数据库操作实体类文件夹（相对路径 包名+自定义路径名称，包将创建于包名的直接路径下）
+     */
+    daoPackage 'com.example.mycard.gen'
+    /**
+     * greenDao实体类包文件夹
+     */
+    targetGenDir 'src/main/java'
+}
 
 android {
     compileSdkVersion 25
@@ -26,5 +52,8 @@ dependencies {
     compile 'com.android.support:design:25.3.1'
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.android.support:support-v4:25.3.1'
-    compile 'org.litepal.android:core:1.3.2'
+    /* greenDao数据库所用*/
+    compile 'org.greenrobot:greendao:3.1.0'
+    compile 'org.greenrobot:greendao-generator:3.0.0'
+    compile 'com.android.support:recyclerview-v7:25.3.1'
 }

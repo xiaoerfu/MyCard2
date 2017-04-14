@@ -11,6 +11,7 @@ public interface IUserModel {
     void login(String username, String userpassword, OnLoginListener onLoginListener);
 
     interface OnLoginListener {
+
         void loginSuccess(User user);
 
         void loginFailed(String s);

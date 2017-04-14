@@ -1,10 +1,9 @@
 package com.example.mycard.Fragment;
 
-
-import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,14 +13,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mycard.R;
+import com.example.mycard.application.MyApplication;
 import com.example.mycard.bean.Card;
+import com.example.mycard.bean.User;
+import com.example.mycard.gen.CardDao;
 
-import org.litepal.tablemanager.Connector;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class InitFragment extends Fragment {
+
+    private List<Card> cardList = new ArrayList<>();
+
+    public CardDao cardDao;
+
+    private Card card;
 
     private Button init;
 
@@ -42,29 +51,37 @@ public class InitFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_init, container, false);
 
-        final Card card = new Card();
+        cardDao = MyApplication.getInstance().getSession().getCardDao();  //创建Card数据库表
+
         init = (Button)view.findViewById(R.id.init);
 
         showCard = (TextView)view.findViewById(R.id.cardNum);
         ownerNum = (EditText)view.findViewById(R.id.ownerId);
         ownerName = (EditText)view.findViewById(R.id.cardOwner);
 
-        showCard.setText("123465798");
         init.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SQLiteDatabase db = Connector.getDatabase();
-                if (ownerNum.getText() == null && ownerName.getText() == null){
-                    Toast.makeText(getActivity(),"请输入正确的数值",Toast.LENGTH_SHORT).show();
-                }else {
-                    card.setOwnerNum(Integer.parseInt(ownerNum.getText().toString()));
-                    card.setCardOwner(ownerName.getText().toString());
-                    card.save();
-                    Toast.makeText(getActivity(), "你点击的初始化按钮", Toast.LENGTH_SHORT).show();
+                insertCard(ownerNum.getText().toString(),ownerName.getText().toString());
+                Toast.makeText(getActivity(),"初始化成功",Toast.LENGTH_SHORT).show();
+                showCard.setText(card.getCardNum());
+                clear();
                 }
-            }
         });
         return view;
+    }
+
+    private void insertCard(String ownerNum,String ownerName){
+        card = new Card();
+        card.setOwnerNum(ownerNum);
+        card.setCardOwner(ownerName);
+        cardDao.insert(card);
+        Log.i("插入的数据为：","----------------"+ card.toString());
+    }
+
+    private void clear(){
+        ownerName.setText("");
+        ownerNum.setText("");
     }
 
 }

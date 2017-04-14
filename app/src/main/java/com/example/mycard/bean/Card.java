@@ -1,67 +1,98 @@
 package com.example.mycard.bean;
 
-import org.litepal.crud.DataSupport;
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * Created by lijianfu on 2017/4/7.
  * 建立card的实体类
  */
-public class Card extends DataSupport {
+@Entity
+public class Card {
 
-    private int cardId;                                 //序号
-    private int cardNum;                            //卡号
+    @Id
+    private Long id;                                         //序号
+    private String cardNum;                      //卡号
     private String cardOwner;                   //卡拥有者
-    private int ownerNum;                        //拥有者ID
-    private double cardBalance;                   //卡余额
+    private String ownerNum;                        //拥有者ID
+    private String  cardBalance;                   //卡余额
 
-    public int getCardId() {
-        return cardId;
-    }
 
-    public void setCardId(int cardId) {
-        this.cardId = cardId;
-    }
-
-    public String getCardOwner() {
-        return cardOwner;
-    }
-
-    public void setCardOwner(String cardOwner) {
-        this.cardOwner = cardOwner;
-    }
-
-    public int getCardNum() {
-        return cardNum;
-    }
-
-    public void setCardNum(int cardNum) {
+    @Generated(hash = 487331640)
+    public Card(Long id, String cardNum, String cardOwner, String ownerNum,
+            String cardBalance) {
+        this.id = id;
         this.cardNum = cardNum;
-    }
-
-    public int getOwnerNum() {
-        return ownerNum;
-    }
-
-    public void setOwnerNum(int ownerNum) {
+        this.cardOwner = cardOwner;
         this.ownerNum = ownerNum;
-    }
-
-    public double getCardBalance() {
-        return cardBalance;
-    }
-
-    public void setCardBalance(double cardBalance) {
         this.cardBalance = cardBalance;
     }
+
+
+    @Generated(hash = 52700939)
+    public Card() {
+    }
+
 
     @Override
     public String toString() {
         return "Card{" +
-                "cardId=" + cardId +
+                "cardId=" + id +
                 ", cardNum=" + cardNum +
                 ", cardOwner='" + cardOwner + '\'' +
                 ", ownerNum=" + ownerNum +
                 ", cardBalance=" + cardBalance +
                 '}';
+    }
+
+
+    public String getCardBalance() {
+        return this.cardBalance;
+    }
+
+
+    public void setCardBalance(String cardBalance) {
+        this.cardBalance = cardBalance;
+    }
+
+
+    public String getOwnerNum() {
+        return this.ownerNum;
+    }
+
+
+    public void setOwnerNum(String ownerNum) {
+        this.ownerNum = ownerNum;
+    }
+
+
+    public String getCardOwner() {
+        return this.cardOwner;
+    }
+
+
+    public void setCardOwner(String cardOwner) {
+        this.cardOwner = cardOwner;
+    }
+
+
+    public String getCardNum() {
+        return this.cardNum;
+    }
+
+
+    public void setCardNum(String cardNum) {
+        this.cardNum = cardNum;
+    }
+
+
+    public Long getId() {
+        return this.id;
+    }
+
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
