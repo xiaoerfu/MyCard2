@@ -53,6 +53,11 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder>{
         holder.owner_name.setText(card.getCardOwner());
     }
 
+    public void remove(int position) {
+        mCardList.remove(position);
+        notifyItemRemoved(position);
+    }
+
     @Override
     public int getItemCount() {
         return mCardList.size();

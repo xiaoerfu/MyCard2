@@ -15,38 +15,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/editQuery"
-        android:hint="通过持卡人或者持卡人id查询或删除"
-        android:layout_marginTop="15dp" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:text="查询所有"
-        android:id="@+id/query_all"
-        android:textColor="#FFF"
-        android:background="@drawable/shap"
-        android:layout_marginTop="10dp"
-        android:layout_weight="1"/>
 
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:text="删除所有"
-            android:id="@+id/delete_all"
-            android:textColor="#FFF"
-            android:background="@drawable/shap"
-            android:layout_marginTop="10dp"
-            android:layout_weight="1"/>
-    </LinearLayout>
     <!--<RelativeLayout-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="match_parent">-->
@@ -77,6 +46,46 @@
         <!--android:layout_toEndOf="@+id/singleQuery"-->
         <!--android:layout_marginLeft="26dp"-->
         <!--android:layout_marginStart="26dp" />-->
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:id="@+id/show_message" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editQuery"
+        android:hint="通过持卡人或者持卡人id查询或删除"
+        android:layout_marginTop="15dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:text="查询所有"
+        android:id="@+id/query_all"
+        android:textColor="#FFF"
+        android:background="@drawable/shap"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"/>
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="删除所有"
+            android:id="@+id/delete_all"
+            android:textColor="#FFF"
+            android:background="@drawable/shap"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -104,9 +113,4 @@
             android:layout_weight="1"/>
     </LinearLayout>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/show_message"
-            android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:layout_marginTop="15dp" />
 </LinearLayout>

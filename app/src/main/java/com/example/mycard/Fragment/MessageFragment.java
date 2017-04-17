@@ -12,11 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 
+import com.example.mycard.MainActivity;
 import com.example.mycard.R;
 import com.example.mycard.adapter.CardAdapter;
+import com.example.mycard.adapter.ListViewAdapter;
 import com.example.mycard.application.MyApplication;
 import com.example.mycard.bean.Card;
 import com.example.mycard.gen.CardDao;
@@ -41,7 +44,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener{
 
     private EditText getName;
 
-    private RecyclerView recyclerView;
+    private ListView listView;
 
     private List<Card>cardList = new ArrayList<>();
 
@@ -73,7 +76,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener{
         getName = (EditText) view.findViewById(R.id.editQuery);
         singleQuery = (Button) view.findViewById(R.id.single_query);
         singleDelete = (Button)view.findViewById(R.id.single_delete);
-        recyclerView = (RecyclerView)view.findViewById(R.id.show_message);
+        listView = (ListView) view.findViewById(R.id.show_message);
 
         findAll.setOnClickListener(this);
         deleteAll.setOnClickListener(this);
@@ -91,10 +94,11 @@ public class MessageFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.delete_all:
                 deleteAll();
+                clear();
                 break;
             case R.id.single_query:
                 singleQueryByName(getName.getText().toString());
-                clear();
+                getName.setText("");
                 break;
             case R.id.single_delete:
                 singleDelete(getName.getText().toString());
@@ -107,21 +111,15 @@ public class MessageFragment extends Fragment implements View.OnClickListener{
 
     /*查询全部信息*/
     private void showAll(){
-        try {
-            List<Card> cards = cardDao.loadAll();
+        List<Card> cards = cardDao.loadAll();
+        try{
             card = cards.get(cards.size() - 1);
             if (card != null) {
-                cardList.addAll(cards);
-                LinearLayoutManager layoutManager = new LinearLayoutManager(this.getActivity());
-                recyclerView.setLayoutManager(layoutManager);
-                CardAdapter adapter = new CardAdapter(cardList);
-                recyclerView.setAdapter(adapter);
-                Log.i("全部数据：", "--------------------" + cardList);
-                //设置Item增加、移除动画
-                recyclerView.setItemAnimator(new DefaultItemAnimator());
-                //添加分割线
-                recyclerView.addItemDecoration(new DividerItemDecoration(
-                        getActivity(), DividerItemDecoration.VERTICAL));
+                for (int i = 0; i < cards.size(); i++) {
+                    Log.i("查询的数据：", cards.get(i).toString());
+                }
+                ListViewAdapter listViewAdapter = new ListViewAdapter(getActivity(), R.layout.user_message, cards);
+                listView.setAdapter(listViewAdapter);
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -132,7 +130,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener{
     /*删除全部信息*/
     private void deleteAll(){
         cardDao.deleteAll();
-        recyclerView.setAdapter(null);
+//        clear();
         Log.i("删除数据完成：",card.toString());
         Toast.makeText(getActivity(),"删除数据成功",Toast.LENGTH_SHORT).show();
     }
@@ -147,7 +145,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener{
             card = cardDao.queryBuilder().where(CardDao.Properties.CardOwner.eq(ownerName)).build().unique();
             if (card != null) {
                 cardDao.deleteByKey(card.getId());
-                recyclerView.setAdapter(null);
+                listView.setAdapter(null);
                 Toast.makeText(getActivity(),"你成功删除:"+ card.getCardOwner(),Toast.LENGTH_SHORT).show();
             }else{
                 Toast.makeText(getActivity(),"持卡人不存在",Toast.LENGTH_SHORT).show();
@@ -156,52 +154,25 @@ public class MessageFragment extends Fragment implements View.OnClickListener{
 
     /*指定查询*/
     private void singleQueryByName(String ownerName){
-
-        List<Card> cards = cardDao.queryBuilder()
-                .where(CardDao.Properties.CardOwner.eq(ownerName))
-                .build().list();
-        if (cards != null) {
-            cardList.addAll(cards);
-            LinearLayoutManager layoutManager = new LinearLayoutManager(this.getActivity());
-            recyclerView.setLayoutManager(layoutManager);
-            CardAdapter adapter = new CardAdapter(cardList);
-            recyclerView.setAdapter(adapter);
-            Log.i("指定查询的数据：", "--------------------" + cardList);
-            //设置Item增加、移除动画
-            recyclerView.setItemAnimator(new DefaultItemAnimator());
-            //添加分割线
-            recyclerView.addItemDecoration(new DividerItemDecoration(
-                    getActivity(), DividerItemDecoration.VERTICAL));
-        }else {
-            Toast.makeText(getActivity(),"查询不到数据",Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    /*指定查询*/
-    private void singleQueryById(){
-
-        List<Card> cards = cardDao.queryBuilder()
-                .where(CardDao.Properties.CardOwner.eq("xiaobai"))
-                .build().list();
-        if (cards != null) {
-            cardList.addAll(cards);
-            LinearLayoutManager layoutManager = new LinearLayoutManager(this.getActivity());
-            recyclerView.setLayoutManager(layoutManager);
-            CardAdapter adapter = new CardAdapter(cardList);
-            recyclerView.setAdapter(adapter);
-            Log.i("指定查询的数据：", "--------------------" + cardList);
-            //设置Item增加、移除动画
-            recyclerView.setItemAnimator(new DefaultItemAnimator());
-            //添加分割线
-            recyclerView.addItemDecoration(new DividerItemDecoration(
-                    getActivity(), DividerItemDecoration.VERTICAL));
-        }else {
-            Toast.makeText(getActivity(),"查询不到数据",Toast.LENGTH_SHORT).show();
+        try {
+            if (card != null) {
+                List<Card> cards = cardDao.queryBuilder()
+                        .where(CardDao.Properties.CardOwner.eq(ownerName))
+                        .build().list();
+                card = cards.get(cards.size()-1);
+                ListViewAdapter listViewAdapter = new ListViewAdapter(getActivity(), R.layout.user_message, cards);
+                listView.setAdapter(listViewAdapter);
+                Log.i("查询的数据：" , cards.toString());
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(getActivity(), "请重新输入", Toast.LENGTH_SHORT).show();
         }
     }
 
     /*清除文本框*/
     private void clear(){
         getName.setText("");
+        listView.setAdapter(null);
     }
 }

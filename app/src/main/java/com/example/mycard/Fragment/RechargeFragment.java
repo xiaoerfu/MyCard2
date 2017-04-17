@@ -37,6 +37,7 @@ public class RechargeFragment extends Fragment {
     private EditText editMoney;
     private EditText editOwnerId;
     private Button recharge;
+    private Button value_chains;
 
     public RechargeFragment() {
         // Required empty public constructor
@@ -56,6 +57,8 @@ public class RechargeFragment extends Fragment {
         editOwnerId = (EditText) view.findViewById(R.id.ownerId);
 
         recharge = (Button) view.findViewById(R.id.recharge);
+        value_chains = (Button)view.findViewById(R.id.value_chains);
+
 
         recharge.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,34 +66,56 @@ public class RechargeFragment extends Fragment {
                 updateCard(rechargeObject.getText().toString(),editOwnerId.getText().toString());
             }
         });
+
+        value_chains.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                update_Card(rechargeObject.getText().toString(),editOwnerId.getText().toString());
+            }
+        });
         return view;
     }
 
-    /*更新数据表格*/
+    /*更新数据表格充值哦*/
     private void updateCard(String ownerName,String ownerId) {
             /*指定更新*/
         Card card=cardDao.queryBuilder()
                 .where(CardDao.Properties.CardOwner.eq(ownerName),CardDao.Properties.OwnerNum.eq(ownerId))
                 .build().unique();
             if(card != null){
-                card.setCardBalance(editMoney.getText().toString());
+                card.setCardBalance(card.getCardBalance() + Double.parseDouble(editMoney.getText().toString()));
                 cardDao.update(card);
+                clear();
                 Toast.makeText(getActivity(),"充值成功",Toast.LENGTH_SHORT).show();
                 Log.i("数据库内容", "" + card.toString());
-
-//                updateAdapter(userDao.queryBuilder().list());
-//                mUserAdapter.notifyDataSetChanged();
             }else{
                 Toast.makeText(getActivity(),"充值失败",Toast.LENGTH_SHORT).show();
             }
     }
 
-//    User findUser = userDao.queryBuilder().where(UserDao.Properties.Name.eq("wyk")).build().unique();
-//    if(findUser != null) {
-//        findUser.setName(newName);
-//        userDao.update(findUser);
-//        Toast.makeText(MyApplication.getContext(), "修改成功", Toast.LENGTH_SHORT).show();
-//    } else {
-//        Toast.makeText(MyApplication.getContext(), "用户不存在", Toast.LENGTH_SHORT).show();
-//    }
+    /*更新数据表格扣值哦*/
+    private void update_Card(String ownerName,String ownerId) {
+            /*指定更新*/
+        Card card=cardDao.queryBuilder()
+                .where(CardDao.Properties.CardOwner.eq(ownerName),CardDao.Properties.OwnerNum.eq(ownerId))
+                .build().unique();
+        if(card != null){
+            Double dou = card.getCardBalance() - Double.parseDouble(editMoney.getText().toString());
+            dou = (double)Math.round(dou*100)/100;
+            card.setCardBalance(dou);
+            cardDao.update(card);
+            clear();
+            Toast.makeText(getActivity(),"扣值成功",Toast.LENGTH_SHORT).show();
+            Log.i("数据库内容", "" + card.toString());
+        }else{
+            Toast.makeText(getActivity(),"扣值失败",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /*清除输入的信息*/
+    private void clear(){
+        rechargeObject.setText("");
+        editMoney.setText("");
+        editOwnerId.setText("");
+    }
 }

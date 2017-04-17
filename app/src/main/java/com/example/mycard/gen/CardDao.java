@@ -28,7 +28,7 @@ public class CardDao extends AbstractDao<Card, Long> {
         public final static Property CardNum = new Property(1, String.class, "cardNum", false, "CARD_NUM");
         public final static Property CardOwner = new Property(2, String.class, "cardOwner", false, "CARD_OWNER");
         public final static Property OwnerNum = new Property(3, String.class, "ownerNum", false, "OWNER_NUM");
-        public final static Property CardBalance = new Property(4, String.class, "cardBalance", false, "CARD_BALANCE");
+        public final static Property CardBalance = new Property(4, double.class, "cardBalance", false, "CARD_BALANCE");
     }
 
 
@@ -48,7 +48,7 @@ public class CardDao extends AbstractDao<Card, Long> {
                 "\"CARD_NUM\" TEXT," + // 1: cardNum
                 "\"CARD_OWNER\" TEXT," + // 2: cardOwner
                 "\"OWNER_NUM\" TEXT," + // 3: ownerNum
-                "\"CARD_BALANCE\" TEXT);"); // 4: cardBalance
+                "\"CARD_BALANCE\" REAL NOT NULL );"); // 4: cardBalance
     }
 
     /** Drops the underlying database table. */
@@ -80,11 +80,7 @@ public class CardDao extends AbstractDao<Card, Long> {
         if (ownerNum != null) {
             stmt.bindString(4, ownerNum);
         }
- 
-        String cardBalance = entity.getCardBalance();
-        if (cardBalance != null) {
-            stmt.bindString(5, cardBalance);
-        }
+        stmt.bindDouble(5, entity.getCardBalance());
     }
 
     @Override
@@ -110,11 +106,7 @@ public class CardDao extends AbstractDao<Card, Long> {
         if (ownerNum != null) {
             stmt.bindString(4, ownerNum);
         }
- 
-        String cardBalance = entity.getCardBalance();
-        if (cardBalance != null) {
-            stmt.bindString(5, cardBalance);
-        }
+        stmt.bindDouble(5, entity.getCardBalance());
     }
 
     @Override
@@ -129,7 +121,7 @@ public class CardDao extends AbstractDao<Card, Long> {
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // cardNum
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // cardOwner
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // ownerNum
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4) // cardBalance
+            cursor.getDouble(offset + 4) // cardBalance
         );
         return entity;
     }
@@ -140,7 +132,7 @@ public class CardDao extends AbstractDao<Card, Long> {
         entity.setCardNum(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setCardOwner(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setOwnerNum(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setCardBalance(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setCardBalance(cursor.getDouble(offset + 4));
      }
     
     @Override

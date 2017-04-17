@@ -75,6 +75,7 @@ public class InitFragment extends Fragment {
         card = new Card();
         card.setOwnerNum(ownerNum);
         card.setCardOwner(ownerName);
+        card.setCardBalance(0.0);
         cardDao.insert(card);
         Log.i("插入的数据为：","----------------"+ card.toString());
     }
